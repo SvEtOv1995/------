@@ -12,13 +12,16 @@ def index():
 @app.route('/track', methods=['POST'])
 def track():
     data = request.json
-    log_entry = f"{datetime.now()} - {json.dumps(data, ensure_ascii=False)}\n"
+    log_entry = {
+        "timestamp": datetime.utcnow().isoformat(),
+        "data": data
+    }
 
-    # Лог в файл
+    # Запись в файл
     with open("track_log.txt", "a", encoding="utf-8") as f:
-        f.write(log_entry)
+        f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
 
-    print(f"[LOG] {log_entry.strip()}")
+    print(f"[LOG] {log_entry}")
     return jsonify({"status": "ok"})
 
 if __name__ == '__main__':
