@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: track-site
+    runtime: python
+    buildCommand: ""
+    startCommand: "python server.py"
+    pythonVersion: 3.10
